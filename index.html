@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#d9d5ed">
+<title>VZETA | Catálogo</title>
+<style>
+
+@font-face{
+  font-family:'Kollektif';
+  src:url('fonts/Kollektif.ttf') format('truetype');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Kollektif';
+  src:url('fonts/Kollektif-Bold.ttf') format('truetype');
+  font-weight:700;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:'Wide Hope';
+  src:url('fonts/Wide-Hope.ttf') format('truetype');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
+
+
+
+
+:root{
+  --ink:#111;
+  --cream:#fffaf0;
+  --sand:#e8cba8;
+  --pink:#f5c2ea;
+  --lilac:#d9d6ee;
+  --yellow:#fbe28a;
+  --white:#fffdf9;
+  --muted:#6e6258;
+  --line:#eadfd5;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Kollektif',Arial,Helvetica,sans-serif;background:#fffdf9;color:var(--ink)}
+button,select,input{font:inherit}
+a{text-decoration:none;color:inherit}
+.shell{max-width:1180px;margin:auto;padding:0 20px}
+.topbar{background:#f5c2ea;color:#3d3029;font-size:13px;text-align:center;padding:9px 16px;letter-spacing:.04em}
+nav{position:sticky;top:0;z-index:30;background:#d9d5ed;border-bottom:1px solid rgba(255,255,255,.45)}
+.navin{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{
+  display:flex;
+  align-items:center;
+  height:54px;
+  background:#fff;
+  padding:6px 12px;
+  border-radius:14px;
+  box-shadow:0 2px 8px rgba(80,70,100,.08);
+}
+.brand span{display:none}
+.navlinks{display:flex;gap:22px;font-size:14px}
+
+.brand-logo{
+  display:block;
+  height:44px;
+  width:auto;
+  max-width:190px;
+  object-fit:contain;
+}
+nav .navlinks a{color:#5f5870;font-weight:700}
+.cartbtn{
+  border:0;
+  background:#f5c2ea;
+  color:#4e4356;
+  padding:12px 18px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:700;
+  box-shadow:0 3px 0 rgba(78,67,86,.08);
+}
+.cartbtn:hover{filter:brightness(.98)}
+
+.hero{padding:72px 0 48px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.kicker{font-weight:800;text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:#a2775f}
+h1{font-family:'Wide Hope',Arial,sans-serif;font-size:clamp(52px,7vw,94px);line-height:.92;margin:14px 0 22px;letter-spacing:-.055em}
+.hero p{font-size:18px;line-height:1.6;max-width:610px;color:#564c44}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{border:0;border-radius:999px;padding:14px 20px;font-weight:800;cursor:pointer}
+.btn-dark{background:#d9d6ee;color:#302933}
+.btn-light{background:#fff;border:1px solid #ccc}
+.hero-art{aspect-ratio:4/5;position:relative;border-radius:32px;background:#fbe28a;overflow:hidden}
+.hero-art:before{content:none}
+.hero-card{position:absolute;inset:0;background:#fffdf9;border-radius:32px;display:grid;place-items:center;padding:0;box-shadow:none;overflow:hidden}
+.hero-card img{width:100%;height:100%;object-fit:cover;border-radius:0}
+.section{padding:68px 0}
+.section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:26px}
+.section-head h2{font-family:'Wide Hope',Arial,sans-serif;font-size:42px;margin:0}
+.section-head p{max-width:520px;color:#62594f;margin:0;line-height:1.5}
+.filters{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0 30px}
+.filter{border:1px solid #cfc5bb;background:white;padding:10px 15px;border-radius:999px;cursor:pointer}
+.filter.active{background:#f5c2ea;color:#372c32;border-color:#f5c2ea}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(80,55,30,.04)}
+.card-img{aspect-ratio:4/5;background:#fffdf9;display:grid;place-items:center;overflow:hidden;position:relative}
+.card-img img{width:100%;height:100%;object-fit:contain}
+.card-img.contain img{object-fit:contain}
+.badge{position:absolute;left:14px;top:14px;background:#fbe28a;color:#3b312a;font-size:11px;font-weight:800;padding:7px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.06em}
+.card-body{padding:20px;display:flex;flex-direction:column;gap:12px;flex:1}
+.card-title{font-size:21px;font-weight:900}
+.price{font-family:'Wide Hope',Arial,sans-serif;font-size:29px}
+.small{color:#756b61;font-size:13px;line-height:1.45}
+.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px;text-transform:uppercase;letter-spacing:.07em}
+.field select{width:100%;border:1px solid #d9cec3;border-radius:12px;padding:11px;background:#fff}
+.add{margin-top:auto;border:0;background:#e8cba8;color:#3c3028;border-radius:13px;padding:13px;cursor:pointer;font-weight:800}
+.aromas{background:#d9d6ee;color:#302933}
+.aroma-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.aroma{border:1px solid rgba(80,64,85,.12);border-radius:18px;padding:18px;background:rgba(255,255,255,.46)}
+.aroma strong{display:block;font-size:16px;margin-bottom:5px}
+.aroma span{color:#685e69;font-size:13px;line-height:1.4}
+.order-band{background:#fbe28a;border-radius:28px;padding:34px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+.order-band h3{font-family:'Wide Hope',Arial,sans-serif;font-size:34px;margin:0 0 8px}
+.order-band p{margin:0;color:#695b50}
+
+.wholesale-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:stretch}.wholesale-copy{background:#f5c2ea;border-radius:28px;padding:38px;display:flex;flex-direction:column;justify-content:center}.wholesale-copy h3{font-family:'Wide Hope',Arial,sans-serif;font-size:40px;line-height:1.04;margin:0 0 16px}.wholesale-copy p{font-size:16px;line-height:1.65;color:#55484f;margin:0 0 22px}.wholesale-tags{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:24px}.wholesale-tags span{background:rgba(255,255,255,.58);border:1px solid rgba(70,50,65,.09);padding:9px 12px;border-radius:999px;font-size:12px;font-weight:800}.wholesale-photo{border-radius:28px;overflow:hidden;background:#e8cba8;min-height:420px}.wholesale-photo img{width:100%;height:100%;object-fit:cover}.price{color:#111}
+footer{padding:38px 0 50px;color:#776e66;font-size:13px;text-align:center}
+.drawer{position:fixed;inset:0;z-index:60;pointer-events:none}
+.drawer.open{pointer-events:auto}
+.overlay{position:absolute;inset:0;background:rgba(0,0,0,.48);opacity:0;transition:.2s}
+.drawer.open .overlay{opacity:1}
+.panel{position:absolute;right:0;top:0;height:100%;width:min(460px,100%);background:#fff;transform:translateX(100%);transition:.25s;display:flex;flex-direction:column}
+.drawer.open .panel{transform:none}
+.panel-head{padding:20px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
+.panel-head h3{margin:0;font-size:24px}
+.close{border:0;background:#eee;width:38px;height:38px;border-radius:50%;cursor:pointer}
+
+.panel-actions{display:flex;align-items:center;gap:8px}
+.clear-cart,.trash-item{
+  border:0;
+  cursor:pointer;
+  display:inline-grid;
+  place-items:center;
+}
+.clear-cart{
+  background:#f5c2ea;
+  color:#5a4655;
+  width:38px;height:38px;border-radius:50%;
+}
+.trash-item{
+  background:transparent;
+  color:#9b6d7e;
+  width:30px;height:30px;border-radius:8px;
+}
+.clear-cart:hover,.trash-item:hover{filter:brightness(.96)}
+.clear-cart svg,.trash-item svg{width:18px;height:18px;fill:currentColor}
+.item-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+
+.cart-list{padding:16px;overflow:auto;flex:1}
+.cart-item{padding:14px 0;border-bottom:1px solid #eee;display:grid;grid-template-columns:1fr auto;gap:10px}
+.cart-item strong{display:block;margin-bottom:4px}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:30px;height:30px;border:1px solid #ccc;background:white;border-radius:8px;cursor:pointer}
+.remove{border:0;background:none;color:#9f4e4e;cursor:pointer;padding:0;font-size:12px}
+.panel-foot{border-top:1px solid #eee;padding:18px}
+.total{display:flex;justify-content:space-between;font-size:21px;font-weight:900;margin-bottom:14px}
+.whatsapp{width:100%;border:0;background:#20b65a;color:#fff;padding:14px;border-radius:13px;font-weight:900;cursor:pointer}
+.note{font-size:11px;color:#777;margin-top:9px;text-align:center}
+.empty{text-align:center;color:#777;padding:60px 10px}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:#f5c2ea;color:#302933;padding:12px 17px;border-radius:999px;opacity:0;pointer-events:none;transition:.2s;z-index:90}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+
+.field select:invalid,
+.field select option[value=""] {
+  color:#8d8178;
+}
+.field select {
+  font-family:'Kollektif',Arial,Helvetica,sans-serif;
+}
+
+
+body, button, select, input, .small, .field, .navlinks, footer, .price {
+  font-family:'Kollektif', Arial, Helvetica, sans-serif;
+}
+h1, h2, h3, .brand, .card-title, .kicker, .section-head h2, .order-band h3 {
+  font-family:'Wide Hope', Arial, sans-serif;
+  font-weight:400;
+}
+
+
+.top-aromas{
+  margin:0 0 34px;
+  background:#fffaf5;
+  color:#3d3546;
+  border-radius:24px;
+  padding:24px;
+}
+.top-aromas-head h3{
+  margin:5px 0 7px;
+  font-size:30px;
+}
+.top-aromas-head p{
+  margin:0 0 18px;
+  color:#6f6577;
+}
+.top-label{
+  display:inline-block;
+  background:#f5c2ea;
+  color:#55485d;
+  font-family:'Kollektif',Arial,sans-serif;
+  font-weight:700;
+  font-size:12px;
+  letter-spacing:.12em;
+  padding:7px 10px;
+  border-radius:999px;
+}
+.top-list{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+.top-item{
+  background:#d9d5ed;
+  border-radius:16px;
+  padding:15px 13px;
+  min-height:92px;
+}
+.top-item .rank{
+  display:block;
+  font-family:'Wide Hope',Arial,sans-serif;
+  font-size:24px;
+  margin-bottom:7px;
+}
+.top-item strong{font-size:14px}
+.top-loading{color:#7d7283;font-size:14px}
+.stock-status{
+  min-height:20px;
+  margin-top:8px;
+  font-size:12px;
+  font-weight:700;
+}
+.stock-ok{color:#487044}
+.stock-low{color:#8a6c13}
+.stock-out{color:#a64e5f}
+.stock-wait{color:#8b8089;font-weight:400}
+@media(max-width:900px){.top-list{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.top-list{grid-template-columns:1fr}}
+
+@media(max-width:900px){
+  .wholesale-grid{grid-template-columns:1fr}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-art{min-height:0}
+  .products{grid-template-columns:repeat(2,1fr)}
+  .aroma-grid{grid-template-columns:repeat(2,1fr)}
+  .navlinks{display:none}
+}
+@media(max-width:600px){
+  .wholesale-copy{padding:26px}
+  .wholesale-copy h3{font-size:32px}
+  .shell{padding:0 14px}
+  .hero{padding-top:42px}
+  .hero-art{min-height:0}
+  .hero-card{inset:0}
+  .products{grid-template-columns:1fr}
+  .aroma-grid{grid-template-columns:1fr}
+  .section{padding:52px 0}
+  .section-head{display:block}
+  .section-head h2{margin-bottom:10px}
+  .order-band{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="shell navin">
+    <a class="brand" href="#" aria-label="VZETA"><img class="brand-logo" src="assets/logo-vzeta-original.png" alt="VZETA"></a>
+    <div class="navlinks">
+      <a href="#productos">Productos</a>
+      <a href="#aromas">Aromas</a>
+      <a href="#mayorista">Mayorista</a>
+      <a href="#como-pedir">Cómo pedir</a>
+    </div>
+    <button class="cartbtn" onclick="openCart()">Pedido · <span id="cartCount">0</span></button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="shell hero-grid">
+    <div>
+      <div class="kicker">VZETA</div>
+      <h1>Aromas que se sienten.<br>Y se quedan.</h1>
+      <p>Elegí tu presentación, seleccioná el aroma que más te guste y armá tu pedido en unos pocos pasos.</p>
+      <div class="hero-actions">
+        <a href="#productos" class="btn btn-dark">Ver productos</a>
+        <a href="#aromas" class="btn btn-light">Conocer aromas</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="hero-card"><img src="assets/hero-productos.png" alt="Productos VZETA"></div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="productos">
+<div class="shell">
+  <div class="section-head">
+    <div><div class="kicker">Catálogo</div><h2>Elegí tu producto</h2></div>
+    <p>Los precios que ves son los valores actuales de venta. En cada producto podés seleccionar el aroma antes de agregarlo al pedido.</p>
+  </div>
+  <div class="filters">
+    <button class="filter active" data-filter="all">Todos</button>
+    <button class="filter" data-filter="textil">Perfume textil</button>
+    <button class="filter" data-filter="difusor">Difusores</button>
+    <button class="filter" data-filter="auto">Auto</button>
+  </div>
+  <div class="products" id="productGrid"></div>
+</div>
+</section>
+
+<section class="section aromas" id="aromas">
+<div class="shell">
+  <div class="section-head">
+    <div><div class="kicker" style="color:#7a607f">Fragancias</div><h2>Encontrá tu aroma</h2></div>
+    <p style="color:#625868">Todos los aromas están disponibles en formato textil, difusor de ambiente o auto.</p>
+  </div>
+  
+  <div class="top-aromas" id="topAromas">
+    <div class="top-aromas-head">
+      <div>
+        <span class="top-label">TOP 5</span>
+        <h3>Los aromas más pedidos</h3>
+        <p>Si es tu primera compra, podés empezar por los favoritos de nuestros clientes.</p>
+      </div>
+    </div>
+    <div class="top-list" id="topList">
+      <div class="top-loading">El ranking se actualizará desde la planilla de VZETA.</div>
+    </div>
+  </div>
+  <div class="aroma-grid" id="aromaGrid"></div>
+</div>
+</section>
+
+<section class="section" id="mayorista"><div class="shell"><div class="section-head"><div><div class="kicker">Para tu negocio</div><h2>Venta mayorista & marca propia</h2></div><p>Si tenés un local, revendés productos o querés desarrollar una línea con tu propia identidad, escribinos y te contamos las opciones disponibles.</p></div><div class="wholesale-grid"><div class="wholesale-copy"><h3>Llevá nuestros aromas a tu negocio.</h3><p>Trabajamos con propuestas mayoristas para locales, revendedores y emprendimientos. También contamos con opciones para comercializar perfumes textiles y difusores con <strong>tu propia marca</strong>.</p><div class="wholesale-tags"><span>Venta mayorista</span><span>Reventa en local</span><span>Marca propia</span><span>Distintas presentaciones</span></div><button class="btn btn-dark" onclick="askWholesale()">Quiero información mayorista</button></div><div class="wholesale-photo"><img src="assets/vzeta-5.png" alt="Presentación mayorista VZETA"></div></div></div></section>
+<section class="section" id="como-pedir">
+<div class="shell">
+  <div class="order-band">
+    <div>
+      <h3>Armá tu pedido y envialo por WhatsApp</h3>
+      <p>Sumá productos, elegí aromas y cantidades. El mensaje se arma automáticamente con el total.</p>
+    </div>
+    <button class="btn btn-dark" onclick="openCart()">Ver mi pedido</button>
+  </div>
+</div>
+</section>
+
+<footer>
+  <div class="shell">VZETA · Catálogo online · Precios sujetos a actualización</div>
+</footer>
+
+<div class="drawer" id="drawer">
+  <div class="overlay" onclick="closeCart()"></div>
+  <aside class="panel">
+    <div class="panel-head"><h3>Tu pedido</h3>
+      <div class="panel-actions">
+        <button class="clear-cart" onclick="clearCart()" title="Vaciar carrito" aria-label="Vaciar carrito">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l1 2h4v2H4V5h4l1-2Zm-2 6h10l-1 11H8L7 9Zm3 2v7h2v-7h-2Zm4 0v7h2v-7h-2Z"/></svg>
+        </button>
+        <button class="close" onclick="closeCart()">✕</button>
+      </div>
+    </div>
+    <div class="cart-list" id="cartList"></div>
+    <div class="panel-foot">
+      <div class="total"><span>Total</span><span id="cartTotal">$0</span></div>
+      <button class="whatsapp" onclick="sendWhatsApp()">Enviar pedido por WhatsApp</button>
+      <div class="note">Se abrirá WhatsApp con el pedido listo para enviar.</div>
+    </div>
+  </aside>
+</div>
+<div class="toast" id="toast">Agregado al pedido</div>
+
+<script src="config.js"></script>
+<script>
+const aromas = [
+  ["Baby","Suave y delicado."], ["Bamboo","Fresco y verde."], ["Bamboo Jengibre","Fresco con un toque especiado."], ["Bergamota","Cítrico y elegante."], ["Cedro Bergamota","Amaderado y cítrico."], ["Cedro Lavanda","Amaderado y aromático."], ["Naranja Pimienta","Cítrico y especiado."], ["Cheeky","Frutal y vibrante."], ["Cher","Dulce y floral."], ["Clasic","Suave y clásico."], ["Coco Vainilla","Dulce, cálido y reconfortante."], ["Fresh","Limpio y refrescante."], ["Jengibre","Fresco y especiado."], ["Jengibre, Limón y Rosas","Fresco con notas florales."], ["Kids","Suave, alegre y delicado."], ["Luz Cítrica","Luminoso y cítrico."], ["Lavanda","Aromática y serena."], ["Lavanda, Rosas, Maderas","Floral y amaderado."], ["Limón","Cítrico y fresco."], ["Lino","Limpio y delicado."], ["Maderas","Cálido y amaderado."], ["Mango Ananá","Tropical y frutal."], ["Menta Limón Jengibre","Fresco y revitalizante."], ["Pomelo Menta Cedrón","Cítrico y herbal."], ["Sandía Limón Jengibre","Frutal y chispeante."], ["Té Verde Jazmín","Herbal y floral."], ["Tilo","Suave y relajante."], ["Tilo Bamboo","Suave, verde y fresco."], ["Tilo Lavanda","Aromático y sereno."]
+];
+
+const products = [
+  {id:"da10",name:"Difusor auto",size:"10 ml",price:6720,cat:["difusor","auto"],img:"assets/vzeta-4.png",fit:"contain"},
+  {id:"d120",name:"Difusor",size:"120 ml",price:12800,cat:["difusor"],img:"assets/vzeta-2.png",fit:"contain"},
+  {id:"dr250",name:"Difusor refill",size:"250 ml",price:19520,cat:["difusor"],img:"assets/vzeta-3.png"},
+  {id:"dr500",name:"Difusor refill",size:"500 ml",price:37760,cat:["difusor"],img:"assets/vzeta-3.png"},
+  {id:"t60",name:"Perfume textil",size:"60 ml",price:4500,cat:["textil"],img:"assets/textil-60-correcto.png"},
+  {id:"t250",name:"Perfume textil",size:"250 ml · con atomizador",price:9680,cat:["textil"],img:"assets/vzeta-7.png"},
+  {id:"t500a",name:"Perfume textil",size:"500 ml · con atomizador",price:18080,cat:["textil"],img:"assets/vzeta-6.png"},
+  {id:"t500r",name:"Perfume textil",size:"500 ml · repuesto",price:14900,cat:["textil"],img:"assets/vzeta-8.png"},
+  {id:"t1l",name:"Perfume textil",size:"1 litro · repuesto",price:27040,cat:["textil"],img:"assets/textil-1l-2l-correcto.png"},
+  {id:"t2l",name:"Perfume textil",size:"2 litros · repuesto",price:48320,cat:["textil"],img:"assets/textil-1l-2l-correcto.png"}
+];
+
+let cart = JSON.parse(localStorage.getItem("vzetaCart") || "[]");
+const money = n => "$" + n.toLocaleString("es-AR");
+
+function productCard(p){
+  const opts = `<option value="" selected disabled>Elegí un aroma</option>` + aromas.map(a=>`<option value="${a[0]}">${a[0]}</option>`).join("");
+  return `<article class="card" data-cats="${p.cat.join(" ")}">
+    <div class="card-img ${p.fit||""}">
+      <span class="badge">${p.size}</span>
+      <img src="${p.img}" alt="${p.name} ${p.size}">
+    </div>
+    <div class="card-body">
+      <div><div class="card-title">${p.name}</div><div class="small">${p.size}</div></div>
+      <div class="price">${money(p.price)}</div>
+      <div class="field">
+        <label for="aroma-${p.id}">Elegí aroma</label>
+        <select id="aroma-${p.id}" required onchange="updateStockForProduct('${p.id}')">${opts}</select>
+        <div class="stock-status stock-wait" id="stock-${p.id}">Elegí un aroma para consultar disponibilidad.</div>
+      </div>
+      <button class="add" id="add-${p.id}" onclick="addToCart('${p.id}')">Agregar al pedido</button>
+    </div>
+  </article>`;
+}
+document.getElementById("productGrid").innerHTML = products.map(productCard).join("");
+
+document.getElementById("aromaGrid").innerHTML = aromas.map(a =>
+  `<div class="aroma"><strong>${a[0]}</strong><span>${a[1]}</span></div>`
+).join("");
+
+document.querySelectorAll(".filter").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    const f=btn.dataset.filter;
+    document.querySelectorAll(".card").forEach(card=>{
+      card.style.display = (f==="all" || card.dataset.cats.split(" ").includes(f)) ? "" : "none";
+    });
+  });
+});
+
+
+let stockRows = [];
+let stockConfigured = false;
+
+const norm = s => (s || "").toString().trim().toLowerCase()
+  .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+
+function parseCSV(text){
+  const rows=[]; let row=[], cur="", q=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i], n=text[i+1];
+    if(c === '"'){
+      if(q && n === '"'){cur+='"'; i++;}
+      else q=!q;
+    } else if(c === "," && !q){
+      row.push(cur); cur="";
+    } else if((c === "\n" || c === "\r") && !q){
+      if(c === "\r" && n === "\n") i++;
+      row.push(cur); cur="";
+      if(row.some(v=>v!=="")) rows.push(row);
+      row=[];
+    } else cur+=c;
+  }
+  row.push(cur); if(row.some(v=>v!=="")) rows.push(row);
+  if(!rows.length) return [];
+  const headers=rows[0].map(h=>h.trim());
+  return rows.slice(1).map(r=>{
+    const o={}; headers.forEach((h,i)=>o[h]=(r[i]??"").trim()); return o;
+  });
+}
+
+function productSheetKeys(p){
+  const size = p.size.toLowerCase();
+  let producto=p.name, presentacion=p.size;
+  if(p.id==="da10"){producto="Difusor auto";presentacion="10 ml";}
+  if(p.id==="d120"){producto="Difusor";presentacion="120 ml";}
+  if(p.id==="dr250"){producto="Difusor refill";presentacion="250 ml";}
+  if(p.id==="dr500"){producto="Difusor refill";presentacion="500 ml";}
+  if(p.id==="t60"){producto="Perfume textil";presentacion="60 ml";}
+  if(p.id==="t250"){producto="Perfume textil";presentacion="250 ml";}
+  if(p.id==="t500a"){producto="Perfume textil";presentacion="500 ml c/ atomizador";}
+  if(p.id==="t500r"){producto="Perfume textil";presentacion="500 ml repuesto";}
+  if(p.id==="t1l"){producto="Perfume textil";presentacion="1 litro repuesto";}
+  if(p.id==="t2l"){producto="Perfume textil";presentacion="2 litros repuesto";}
+  return {producto,presentacion};
+}
+
+function findStockRow(p, aroma){
+  const k=productSheetKeys(p);
+  return stockRows.find(r =>
+    norm(r["Producto"])===norm(k.producto) &&
+    norm(r["Presentación"])===norm(k.presentacion) &&
+    norm(r["Aroma"])===norm(aroma) &&
+    norm(r["Activo"]||"sí")!=="no"
+  );
+}
+
+function updateStockForProduct(id){
+  const p=products.find(x=>x.id===id);
+  const select=document.getElementById("aroma-"+id);
+  const status=document.getElementById("stock-"+id);
+  const add=document.getElementById("add-"+id);
+  if(!select || !status || !add) return;
+  if(!select.value){
+    status.className="stock-status stock-wait";
+    status.textContent="Elegí un aroma para consultar disponibilidad.";
+    add.disabled=false;
+    return;
+  }
+  if(!stockConfigured){
+    status.className="stock-status stock-wait";
+    status.textContent="Disponibilidad a confirmar.";
+    add.disabled=false;
+    return;
+  }
+  const r=findStockRow(p,select.value);
+  if(!r){
+    status.className="stock-status stock-out";
+    status.textContent="Sin stock";
+    add.disabled=true;
+    return;
+  }
+  const s=Number(r["Stock"]||0);
+  if(s<=0){
+    status.className="stock-status stock-out";
+    status.textContent="Sin stock";
+    add.disabled=true;
+  }else if(s<=5){
+    status.className="stock-status stock-low";
+    status.textContent="Últimas unidades";
+    add.disabled=false;
+  }else{
+    status.className="stock-status stock-ok";
+    status.textContent="Disponible";
+    add.disabled=false;
+  }
+}
+
+function renderTop5(){
+  const holder=document.getElementById("topList");
+  if(!holder) return;
+  if(!stockConfigured){
+    holder.innerHTML='<div class="top-loading">El ranking aparecerá cuando conectemos la planilla de Google Sheets.</div>';
+    return;
+  }
+  const totals={};
+  stockRows.forEach(r=>{
+    if(norm(r["Activo"]||"sí")==="no") return;
+    const a=(r["Aroma"]||"").trim();
+    if(!a) return;
+    totals[a]=(totals[a]||0)+Number(r["Pedidos"]||0);
+  });
+  const top=Object.entries(totals).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  if(!top.length || top.every(x=>x[1]===0)){
+    holder.innerHTML='<div class="top-loading">Cargá la columna “Pedidos” en la planilla para generar el Top 5.</div>';
+    return;
+  }
+  holder.innerHTML=top.map(([a],i)=>`<div class="top-item"><span class="rank">#${i+1}</span><strong>${a}</strong></div>`).join("");
+}
+
+async function loadStock(){
+  const url=(window.VZETA_CONFIG && window.VZETA_CONFIG.stockCsvUrl) || "";
+  if(!url){
+    stockConfigured=false;
+    renderTop5();
+    return;
+  }
+  try{
+    const res=await fetch(url,{cache:"no-store"});
+    if(!res.ok) throw new Error("No se pudo leer la planilla");
+    const text=await res.text();
+    stockRows=parseCSV(text);
+    stockConfigured=stockRows.length>0;
+    renderTop5();
+  }catch(e){
+    console.warn("Stock VZETA:",e);
+    stockConfigured=false;
+    renderTop5();
+  }
+}
+
+function addToCart(id){
+  const p = products.find(x=>x.id===id);
+  const select = document.getElementById("aroma-"+id);
+  const aroma = select.value;
+  if(!aroma){
+    select.focus();
+    alert("Seleccioná un aroma para continuar.");
+    return;
+  }
+  if(stockConfigured){
+    const r=findStockRow(p,aroma);
+    if(!r || Number(r["Stock"]||0)<=0){
+      alert("Ese aroma está sin stock en esta presentación.");
+      updateStockForProduct(id);
+      return;
+    }
+  }
+  const existing = cart.find(x=>x.id===id && x.aroma===aroma);
+  if(existing) existing.qty++;
+  else cart.push({id:p.id,name:p.name,size:p.size,price:p.price,aroma,qty:1});
+  persist();
+  showToast();
+}
+function persist(){
+  localStorage.setItem("vzetaCart",JSON.stringify(cart));
+  renderCart();
+}
+function askWholesale(){
+  const msg=encodeURIComponent("Hola VZETA! Quisiera recibir información sobre venta mayorista, reventa en local y/o productos con marca propia.");
+  window.open(`https://wa.me/5493585618207?text=${msg}`,"_blank");
+}
+function renderCart(){
+  document.getElementById("cartCount").textContent = cart.reduce((a,b)=>a+b.qty,0);
+  const list=document.getElementById("cartList");
+  if(!cart.length){
+    list.innerHTML='<div class="empty">Todavía no agregaste productos.</div>';
+  }else{
+    list.innerHTML=cart.map((x,i)=>`<div class="cart-item">
+      <div>
+        <strong>${x.name} · ${x.size}</strong>
+        <div class="small">Aroma: ${x.aroma}</div>
+        <button class="trash-item" onclick="removeItem(${i})" title="Eliminar producto" aria-label="Eliminar producto">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l1 2h4v2H4V5h4l1-2Zm-2 6h10l-1 11H8L7 9Zm3 2v7h2v-7h-2Zm4 0v7h2v-7h-2Z"/></svg>
+        </button>
+      </div>
+      <div>
+        <div style="font-weight:800;text-align:right;margin-bottom:8px">${money(x.price*x.qty)}</div>
+        <div class="qty"><button onclick="changeQty(${i},-1)">−</button><span>${x.qty}</span><button onclick="changeQty(${i},1)">+</button></div>
+      </div>
+    </div>`).join("");
+  }
+  const total=cart.reduce((a,b)=>a+b.price*b.qty,0);
+  document.getElementById("cartTotal").textContent=money(total);
+}
+function changeQty(i,d){
+  cart[i].qty+=d;
+  if(cart[i].qty<=0) cart.splice(i,1);
+  persist();
+}
+function removeItem(i){cart.splice(i,1);persist();}
+function clearCart(){
+  if(!cart.length) return;
+  if(confirm("¿Querés vaciar todo el carrito?")){
+    cart=[];
+    persist();
+  }
+}
+function openCart(){document.getElementById("drawer").classList.add("open")}
+function closeCart(){document.getElementById("drawer").classList.remove("open")}
+function showToast(){
+  const t=document.getElementById("toast");t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1200);
+}
+function sendWhatsApp(){
+  if(!cart.length){alert("Agregá al menos un producto al pedido.");return;}
+  const total=cart.reduce((a,b)=>a+b.price*b.qty,0);
+  const lines=cart.map(x=>`• ${x.qty} x ${x.name} ${x.size} — ${x.aroma} — ${money(x.price*x.qty)}`);
+  const text=`Hola VZETA! Quiero hacer este pedido:%0A%0A${lines.join("%0A")}%0A%0ATotal: ${money(total)}`;
+  // Si luego querés enviarlo directo a un número, reemplazá la URL por:
+  // https://wa.me/549XXXXXXXXXX?text=
+  window.open(`https://wa.me/5493585618207?text=${text}`,"_blank");
+}
+
+function askWholesale(){ const msg=encodeURIComponent("Hola VZETA! Quisiera recibir información sobre venta mayorista, reventa en local y/o productos con marca propia."); window.open(`https://wa.me/5493585618207?text=${msg}`,"_blank"); }
+renderCart();
+loadStock();
+</script>
+</body>
+</html>
