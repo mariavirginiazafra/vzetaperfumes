@@ -80,7 +80,11 @@ setTimeout(() => {
         </div>
       `;
 
-      productos.insertAdjacentElement('afterend', section);
+const comoPedir = document.getElementById('como-pedir');
+
+if (comoPedir) {
+  comoPedir.insertAdjacentElement('beforebegin', section);
+}
 
       const nav = document.querySelector('.navlinks');
 
