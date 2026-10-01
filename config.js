@@ -125,8 +125,6 @@ if (comoPedir) {
 
 const section = document.getElementById('stock-inmediato');
 if (section) section.style.display = '';
-      return;
-    }
 
     const groups = {};
 
