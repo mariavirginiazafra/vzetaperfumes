@@ -599,14 +599,7 @@ function addToCart(id){
     alert("Seleccioná un aroma para continuar.");
     return;
   }
-  if(stockConfigured){
-    const r=findStockRow(p,aroma);
-    if(!r || Number(r["Stock"]||0)<=0){
-      alert("Ese aroma está sin stock en esta presentación.");
-      updateStockForProduct(id);
-      return;
-    }
-  }
+ 
   const existing = cart.find(x=>x.id===id && x.aroma===aroma);
   if(existing) existing.qty++;
   else cart.push({id:p.id,name:p.name,size:p.size,price:p.price,aroma,qty:1});
