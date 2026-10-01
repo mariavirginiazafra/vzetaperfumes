@@ -427,9 +427,7 @@ function productCard(p){
       <div class="price">${money(p.price)}</div>
       <div class="field">
         <label for="aroma-${p.id}">Elegí aroma</label>
-        <select id="aroma-${p.id}" required onchange="updateStockForProduct('${p.id}')">${opts}</select>
-        <div class="stock-status stock-wait" id="stock-${p.id}">Elegí un aroma para consultar disponibilidad.</div>
-      </div>
+        <select id="aroma-${p.id}" required>${opts}</select>
       <button class="add" id="add-${p.id}" onclick="addToCart('${p.id}')">Agregar al pedido</button>
     </div>
   </article>`;
