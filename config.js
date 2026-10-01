@@ -114,20 +114,13 @@ setTimeout(() => {
     );
 
     if (!rows.length) {
-      holder.innerHTML = `
-        <div
-          style="
-            background:#fff;
-            border:1px solid #eadfd5;
-            border-radius:18px;
-            padding:20px;
-            color:#6e6258;
-          "
-        >
-          Por el momento no hay productos marcados para entrega inmediata.
-          Igual podés encargar cualquier aroma desde el catálogo.
-        </div>
-      `;
+  const section = document.getElementById('stock-inmediato');
+  if (section) section.style.display = 'none';
+  return;
+}
+
+const section = document.getElementById('stock-inmediato');
+if (section) section.style.display = '';
       return;
     }
 
