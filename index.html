@@ -120,55 +120,13 @@ nav .navlinks a{color:#5f5870;font-weight:700}
 .card-img.contain img{object-fit:contain}
 .badge{position:absolute;left:14px;top:14px;background:#fbe28a;color:#3b312a;font-size:11px;font-weight:800;padding:7px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.06em}
 .card-body{padding:20px;display:flex;flex-direction:column;gap:12px;flex:1}
-.card-title{
-  font-size:24px;
-  font-weight:700;
-  line-height:1.1;
-  margin-bottom:4px;
-}
-
-.small{
-  font-size:14px;
-  color:#756b61;
-  line-height:1.4;
-}
-
-.price{
-  font-family:'Kollektif', Arial, sans-serif;
-  font-size:26px;
-  font-weight:700;
-  color:#111;
-  margin-top:4px;
-  margin-bottom:8px;
-}
-
-.field{
-  margin-top:2px;
-}
-
-.add{
-  margin-top:12px;
-  border:0;
-  background:#e8cba8;
-  color:#3c3028;
-  border-radius:13px;
-  padding:13px 16px;
-  cursor:pointer;
-  font-weight:800;
-}
-
-
-
-
-
-
-
-
-
-a donde debo pegar esto
+.card-title{  font-size:24px;  font-weight:700;  line-height:1.1;  margin-bottom:4px;}
+.small{  font-size:14px;  color:#756b61;  line-height:1.4;}
+.price{  font-family:'Kollektif', Arial, sans-serif;  font-size:26px;  font-weight:700;  color:#111;  margin-top:4px;  margin-bottom:8px;}
+.field{  margin-top:2px;}
+.add{  margin-top:12px;  border:0;  background:#e8cba8;  color:#3c3028;  border-radius:13px;  padding:13px 16px;  cursor:pointer;  font-weight:800;}
 .field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px;text-transform:uppercase;letter-spacing:.07em}
 .field select{width:100%;border:1px solid #d9cec3;border-radius:12px;padding:11px;background:#fff}
-.add{margin-top:auto;border:0;background:#e8cba8;color:#3c3028;border-radius:13px;padding:13px;cursor:pointer;font-weight:800}
 .aromas{background:#d9d6ee;color:#302933}
 .aroma-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .aroma{border:1px solid rgba(80,64,85,.12);border-radius:18px;padding:18px;background:rgba(255,255,255,.46)}
@@ -274,6 +232,7 @@ h1, h2, h3, .brand, .card-title, .kicker, .section-head h2, .order-band h3 {
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:10px;
+  }
 .top-item{
   background:#FCE79A;
   border-radius:16px;
@@ -468,11 +427,14 @@ function productCard(p){
     <div class="card-body">
       <div><div class="card-title">${p.name}</div><div class="small">${p.size}</div></div>
       <div class="price">${money(p.price)}</div>
-      <div class="field">
-        <label for="aroma-${p.id}">Elegí aroma</label>
-        <select id="aroma-${p.id}" required>${opts}</select>
-      <button class="add" id="add-${p.id}" onclick="addToCart('${p.id}')">Agregar al pedido</button>
-    </div>
+     <div class="field">
+  <label for="aroma-${p.id}">Elegí aroma</label>
+  <select id="aroma-${p.id}" required>${opts}</select>
+</div>
+
+<button class="add" id="add-${p.id}" onclick="addToCart('${p.id}')">
+  Agregar al pedido
+</button>
   </article>`;
 }
 document.getElementById("productGrid").innerHTML = products.map(productCard).join("");
