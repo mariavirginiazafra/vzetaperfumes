@@ -650,7 +650,7 @@ const descuento = cantidadTotal >=3 ? subtotal * 0.10 : 0;
 const total = subtotal - descuento;
 
 document.getElementById("cartTotal").innerHTML =
-  cantidadTotal > 3
+  cantidadTotal >= 3
     ? `<span style="font-size:13px;font-weight:400;color:#756b61">
          Subtotal ${money(subtotal)} · 10% OFF
        </span><br>${money(total)}`
