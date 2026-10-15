@@ -646,7 +646,7 @@ function renderCart(){
 const subtotal = cart.reduce((a,b)=>a+b.price*b.qty,0);
 const cantidadTotal = cart.reduce((a,b)=>a+b.qty,0);
 
-const descuento = cantidadTotal > 3 ? subtotal * 0.10 : 0;
+const descuento = cantidadTotal > 2 ? subtotal * 0.10 : 0;
 const total = subtotal - descuento;
 
 document.getElementById("cartTotal").innerHTML =
