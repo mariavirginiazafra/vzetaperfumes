@@ -643,8 +643,18 @@ function renderCart(){
       </div>
     </div>`).join("");
   }
-  const total=cart.reduce((a,b)=>a+b.price*b.qty,0);
-  document.getElementById("cartTotal").textContent=money(total);
+const subtotal = cart.reduce((a,b)=>a+b.price*b.qty,0);
+const cantidadTotal = cart.reduce((a,b)=>a+b.qty,0);
+
+const descuento = cantidadTotal > 3 ? subtotal * 0.10 : 0;
+const total = subtotal - descuento;
+
+document.getElementById("cartTotal").innerHTML =
+  cantidadTotal > 3
+    ? `<span style="font-size:13px;font-weight:400;color:#756b61">
+         Subtotal ${money(subtotal)} · 10% OFF
+       </span><br>${money(total)}`
+    : money(total);
 }
 function changeQty(i,d){
   cart[i].qty+=d;
@@ -666,13 +676,38 @@ function showToast(){
   setTimeout(()=>t.classList.remove("show"),1200);
 }
 function sendWhatsApp(){
-  if(!cart.length){alert("Agregá al menos un producto al pedido.");return;}
-  const total=cart.reduce((a,b)=>a+b.price*b.qty,0);
-  const lines=cart.map(x=>`• ${x.qty} x ${x.name} ${x.size} — ${x.aroma} — ${money(x.price*x.qty)}`);
-  const text=`Hola VZETA! Quiero hacer este pedido:%0A%0A${lines.join("%0A")}%0A%0ATotal: ${money(total)}`;
-  // Si luego querés enviarlo directo a un número, reemplazá la URL por:
-  // https://wa.me/549XXXXXXXXXX?text=
-  window.open(`https://wa.me/5493585618207?text=${text}`,"_blank");
+  if(!cart.length){
+    alert("Agregá al menos un producto al pedido.");
+    return;
+  }
+
+  const subtotal = cart.reduce((a,b)=>a+b.price*b.qty,0);
+  const cantidadTotal = cart.reduce((a,b)=>a+b.qty,0);
+
+  const descuento = cantidadTotal > 3 ? subtotal * 0.10 : 0;
+  const total = subtotal - descuento;
+
+  const lines = cart.map(x =>
+    `• ${x.qty} x ${x.name} ${x.size} — ${x.aroma} — ${money(x.price*x.qty)}`
+  );
+
+  let resumen = `%0A%0ASubtotal: ${money(subtotal)}`;
+
+  if(cantidadTotal > 3){
+    resumen += `%0ADescuento 10%: -${money(descuento)}`;
+  }
+
+  resumen += `%0ATotal: ${money(total)}`;
+
+  const text =
+    `Hola VZETA! Quiero hacer este pedido:%0A%0A` +
+    lines.join("%0A") +
+    resumen;
+
+  window.open(
+    `https://wa.me/5493585618207?text=${text}`,
+    "_blank"
+  );
 }
 
 function askWholesale(){ const msg=encodeURIComponent("Hola VZETA! Quisiera recibir información sobre venta mayorista, reventa en local y/o productos con marca propia."); window.open(`https://wa.me/5493585618207?text=${msg}`,"_blank"); }
