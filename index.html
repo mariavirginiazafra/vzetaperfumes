@@ -693,7 +693,7 @@ function sendWhatsApp(){
 
   let resumen = `%0A%0ASubtotal: ${money(subtotal)}`;
 
-  if(cantidadTotal > 3){
+  if(cantidadTotal >= 3){
     resumen += `%0ADescuento 10%: -${money(descuento)}`;
   }
 
